@@ -12,7 +12,7 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "deploy": "npm run build && npm run deploy:only",
-    "deploy:only": "wrangler pages deploy dist --project-name cleantext",
+    "deploy:only": "wrangler deploy",
     "test": "vitest run",
     "lint": "eslint ."
   },

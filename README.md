@@ -17,23 +17,22 @@ npm run lint
 npm run build
 ```
 
-## 部署到 Cloudflare Pages
+## 部署到 Cloudflare Workers
 
-仓库已包含 `wrangler.jsonc` 与安全响应头配置。使用 Wrangler 直接部署：
+仓库已包含静态资源 Worker 的 `wrangler.jsonc` 与安全响应头配置。使用 Wrangler 直接部署：
 
 ```bash
 npm run build
 npm run deploy
 ```
 
-也可以在 Cloudflare Dashboard 中连接 Git 仓库：
+也可以在 Cloudflare Dashboard 的 Workers Builds 中连接 Git 仓库：
 
 - 构建命令：`npm run build`
-- 部署命令：`npm run deploy:only`（如果控制台提供此字段）
-- 输出目录：`dist`
+- 部署命令：`npm run deploy:only`
 - 根目录：本项目所在目录
 
-这是一个 Pages 项目，不要使用 `npx wrangler deploy`；该命令用于 Workers，会因为没有 Worker 入口文件而失败。
+`wrangler.jsonc` 中的 `assets.directory` 指向 `dist`，并启用了 SPA 回退，因此不需要单独的 Worker 入口文件。
 
 ## 隐私
 
