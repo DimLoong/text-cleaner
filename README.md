@@ -26,7 +26,14 @@ npm run build
 npm run deploy
 ```
 
-也可以在 Cloudflare Dashboard 中连接 Git 仓库：构建命令填写 `npm run build`，输出目录填写 `dist`，根目录填写本项目所在目录。
+也可以在 Cloudflare Dashboard 中连接 Git 仓库：
+
+- 构建命令：`npm run build`
+- 部署命令：`npm run deploy:only`（如果控制台提供此字段）
+- 输出目录：`dist`
+- 根目录：本项目所在目录
+
+这是一个 Pages 项目，不要使用 `npx wrangler deploy`；该命令用于 Workers，会因为没有 Worker 入口文件而失败。
 
 ## 隐私
 
