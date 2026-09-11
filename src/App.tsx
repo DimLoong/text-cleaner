@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Button, Card, Drawer, Input, Message, MessagePlugin, Switch, Tag, Textarea, Tooltip } from 'tdesign-react';
+import { Button, Card, Drawer, Input, Message, MessagePlugin, Switch, TabValue, Tabs, Tag, Textarea, Tooltip } from 'tdesign-react';
 import {
   CopyIcon,
   DeleteIcon,
@@ -248,16 +248,10 @@ function App() {
       </header>
 
       <main id="top">
-        <section className="hero">
-          <div className="eyebrow"><span /> CLEAN · SHAPE · COPY <span /></div>
-          <h1>{t.tagline}</h1>
-          <p>{t.subline}</p>
-        </section>
-
         <section className="workspace" aria-label="Text editor and live preview">
           <Card className="editor-card" bordered>
             <div className="panel-header">
-              <div><span className="step">01</span><h2>{t.input}</h2></div>
+              <div><h2>{t.input}</h2></div>
               <div className="panel-actions">
                 <Button variant="text" size="small" icon={<PasteIcon />} onClick={paste}>{t.paste}</Button>
                 <Button variant="text" size="small" onClick={() => updateSource(t.sampleText)}>{t.sample}</Button>
@@ -285,7 +279,7 @@ function App() {
 
           <Card className="editor-card output-card" bordered>
             <div className="panel-header">
-              <div><span className="step">02</span><h2>{t.output}</h2><Tag size="small" variant="light">LIVE</Tag></div>
+              <div><h2>{t.output}</h2><Tag size="small" variant="light">LIVE</Tag></div>
               <label className="hover-toggle">
                 <span>{t.hoverSelect}</span>
                 <Switch size="small" value={hoverSelect} onChange={setHoverSelect} />
@@ -343,16 +337,25 @@ function App() {
 
         <section className="controls-section">
           <div className="controls-heading">
-            <div><span className="step">03</span><h2>{t.cleaner}</h2><span>{t.instant}</span></div>
+            <div><h2>{t.cleaner}</h2><span>{t.instant}</span></div>
             <span className="autosave"><span className="status-dot" />{t.saved}</span>
           </div>
 
-          <div className="preset-tabs" role="group" aria-label={t.cleaner}>
-            {(['basic', 'article', 'developer'] as const).map((key) => (
-              <Button key={key} variant={preset === key ? 'base' : 'text'} theme={preset === key ? 'primary' : 'default'} onClick={() => choosePreset(key)}>{t[key]}</Button>
-            ))}
-            {preset === 'custom' && <Button variant="base" theme="primary">{t.custom}</Button>}
-          </div>
+          <Tabs
+            className="preset-tabs"
+            value={preset}
+            list={([
+              { value: 'basic', label: t.basic },
+              { value: 'article', label: t.article },
+              { value: 'developer', label: t.developer },
+              { value: 'custom', label: t.custom },
+            ] satisfies Array<{ value: Preset; label: string }>)}
+            onChange={(value: TabValue) => {
+              const next = value as Preset;
+              if (next === 'custom') setPreset(next);
+              else choosePreset(next);
+            }}
+          />
 
           <div className="option-grid">
             {optionGroups.map((group) => (
