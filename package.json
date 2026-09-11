@@ -16,10 +16,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
     "tdesign-icons-react": "^0.6.11",
     "tdesign-react": "^1.18.3",
-    "vite": "latest",
     "react": "latest",
     "react-dom": "latest"
   },
@@ -28,12 +26,14 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "5.2.0",
     "eslint": "latest",
     "eslint-plugin-react-hooks": "latest",
     "eslint-plugin-react-refresh": "latest",
     "globals": "latest",
-    "typescript": "latest",
+    "typescript": "5.9.3",
     "typescript-eslint": "latest",
+    "vite": "7.3.6",
     "vitest": "latest"
   }
 }
