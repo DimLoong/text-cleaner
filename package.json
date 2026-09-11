@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "author": "DimLoong",
   "type": "module",
+  "engines": {
+    "node": ">=22.16 <23"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

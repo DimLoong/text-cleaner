@@ -301,6 +301,14 @@ function App() {
               ) : (
                 <div
                   className="result-text"
+                  onCopy={(event) => {
+                    const selectedText = window.getSelection()?.toString() ?? '';
+                    if (!selectedText) return;
+                    event.preventDefault();
+                    event.clipboardData.clearData();
+                    event.clipboardData.setData('text/plain', selectedText);
+                    showCopyNotice('success', t.copied);
+                  }}
                   onPointerDown={(event) => { pointerStart.current = { x: event.clientX, y: event.clientY, moved: false }; }}
                   onPointerMove={(event) => {
                     if (event.buttons && Math.hypot(event.clientX - pointerStart.current.x, event.clientY - pointerStart.current.y) > 4) pointerStart.current.moved = true;
